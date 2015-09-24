@@ -37,8 +37,8 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="CaclProcessor\CaclProcessor.cs" />
-    <Compile Include="View\CalculatorPage.xaml.cs">
-      <DependentUpon>CalculatorPage.xaml</DependentUpon>
+    <Compile Include="View\CalculatorView.xaml.cs">
+      <DependentUpon>CalculatorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="CaclProcessor\ICaclProcessor.cs" />
     <Compile Include="InputManager\IInputManager.cs" />
@@ -59,7 +59,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="View\CalculatorPage.xaml">
+    <EmbeddedResource Include="View\CalculatorView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

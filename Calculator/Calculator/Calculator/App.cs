@@ -11,7 +11,7 @@ namespace Calculator
     {
         public App()
         {
-            MainPage = new NavigationPage(new CalculatorPage());
+            MainPage = new NavigationPage(new CalculatorView());
         }
 
         protected override void OnStart()

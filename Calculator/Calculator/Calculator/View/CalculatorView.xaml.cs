@@ -3,12 +3,12 @@ using Xamarin.Forms;
 
 namespace Calculator
 {
-    public partial class CalculatorPage : ContentPage
+    public partial class CalculatorView : ContentPage
     {
         //IInputManager displayManager;
         //ICaclProcessor mathProcessor;
 
-        public CalculatorPage()
+        public CalculatorView()
         {
             InitializeComponent();
 
