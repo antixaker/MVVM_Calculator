@@ -80,7 +80,7 @@ namespace Calculator.ViewModel
                 if (displayString != value)
                 {
                     displayString = value;
-                    OnPropertyChanged("FromDisplayString");
+                    OnPropertyChanged("DisplayString");
                 }
             }
 

@@ -39,7 +39,7 @@
       <RowDefinition Height="*"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
-    <Label x:Name="Display" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" BackgroundColor="Black" FontSize="20" Text="{Binding FromDisplayString}"/>
+    <Label x:Name="Display" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" BackgroundColor="Black" FontSize="20" Text="{Binding DisplayString}"/>
     <Button x:Name="ButOne" Grid.Column="0" Grid.Row="4" Text="1" Command="{Binding AddSymbolCommand}" CommandParameter="1"/>
     <Button x:Name="ButTwo" Grid.Column="1" Grid.Row="4" Text="2" Command="{Binding AddSymbolCommand}" CommandParameter="2"/>
     <Button x:Name="ButThree" Grid.Column="2" Grid.Row="4" Text="3" Command="{Binding AddSymbolCommand}" CommandParameter="3"/>

@@ -42,8 +42,6 @@
       <DependentUpon>CalculatorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\ICalculatorModel.cs" />
-    <Compile Include="InputManager\IInputManager.cs" />
-    <Compile Include="InputManager\InputManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
