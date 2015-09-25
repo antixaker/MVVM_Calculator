@@ -15,7 +15,7 @@ namespace Calculator.ViewModel
 
         readonly ICalculatorModel _model;
 
-        string fromDisplayString = "";
+        string displayString = "";
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -26,11 +26,11 @@ namespace Calculator.ViewModel
             this.AddSymbolCommand = new Command<string>(symbol =>
             {
                 //for first button press
-                if (string.IsNullOrEmpty(fromDisplayString))
+                if (string.IsNullOrEmpty(displayString))
                 {
                     if (char.IsDigit(symbol[0]))
                     {
-                        FromDisplayString += symbol;
+                        DisplayString += symbol;
                         return;
                     }
                     else
@@ -38,53 +38,53 @@ namespace Calculator.ViewModel
 
                 }
                 //constraint for input only two numbers and action symbol
-                if (!char.IsDigit(symbol[0]) && symbol != "." && CommandIsFull(fromDisplayString))
+                if (!char.IsDigit(symbol[0]) && symbol != "." && CommandIsFull(displayString))
                     return;
 
-                char lastSymbol = GetLastSymbol(fromDisplayString);
+                char lastSymbol = GetLastSymbol(displayString);
                 //check point enter
-                if (symbol == "." && !CanAddPoint(fromDisplayString, lastSymbol))
+                if (symbol == "." && !CanAddPoint(displayString, lastSymbol))
                     return;
 
                 //check re-enter mathoperator
-                else if (!Char.IsDigit(symbol[0]) && !CanAddMath(fromDisplayString, lastSymbol))
+                else if (!Char.IsDigit(symbol[0]) && !CanAddMath(displayString, lastSymbol))
                 {
-                    FromDisplayString = ReplaceLastSymbol(fromDisplayString, symbol);
+                    DisplayString = ReplaceLastSymbol(displayString, symbol);
                     return;
                 }
 
-                FromDisplayString += symbol;
+                DisplayString += symbol;
 
             });
 
             this.RemoveLastSymbolCommand = new Command(obj =>
             {
-                if (!string.IsNullOrEmpty(fromDisplayString))
-                    this.FromDisplayString = fromDisplayString.Substring(0, fromDisplayString.Length - 1);
+                if (!string.IsNullOrEmpty(displayString))
+                    this.DisplayString = displayString.Substring(0, displayString.Length - 1);
             });
 
-            this.ClearAllCommand = new Command(obj => { this.FromDisplayString = string.Empty; });
+            this.ClearAllCommand = new Command(obj => { this.DisplayString = string.Empty; });
 
             this.CalculateCommand = new Command(obj =>
            {
-               var result = _model.Calculate(fromDisplayString);
+               var result = _model.Calculate(displayString);
                if (result != null)
-                   FromDisplayString = result.ToString();
+                   DisplayString = result.ToString();
            });
         }
 
-        public string FromDisplayString
+        public string DisplayString
         {
             protected set
             {
-                if (fromDisplayString != value)
+                if (displayString != value)
                 {
-                    fromDisplayString = value;
+                    displayString = value;
                     OnPropertyChanged("FromDisplayString");
                 }
             }
 
-            get { return fromDisplayString; }
+            get { return displayString; }
         }
 
         public ICommand AddSymbolCommand { protected set; get; }
