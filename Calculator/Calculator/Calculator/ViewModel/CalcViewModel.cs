@@ -64,6 +64,13 @@ namespace Calculator.ViewModel
             });
 
             this.ClearAllCommand = new Command(obj => { this.FromDisplayString = string.Empty; });
+
+            this.CalculateCommand = new Command(obj =>
+           {
+               var result = _model.Calculate(fromDisplayString);
+               if (result != null)
+                   FromDisplayString = result.ToString();
+           });
         }
 
         public string FromDisplayString
@@ -85,6 +92,8 @@ namespace Calculator.ViewModel
         public ICommand RemoveLastSymbolCommand { protected set; get; }
 
         public ICommand ClearAllCommand { protected set; get; }
+
+        public ICommand CalculateCommand { protected set; get; }
 
         protected void OnPropertyChanged(string propertyName)
         {
@@ -131,7 +140,6 @@ namespace Calculator.ViewModel
             return stringToSplit.Split(separatorArray);
         }
         #endregion
-
 
     }
 }
