@@ -13,12 +13,16 @@ namespace Calculator.ViewModel
     {
         readonly char[] actionSymbols = { '+', '-', '/', '*' };
 
+        readonly ICalculatorModel _model;
+
         string fromDisplayString = "";
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public CalcViewModel()
         {
+            _model = new CalculatorModel();
+
             this.AddSymbolCommand = new Command<string>(symbol =>
             {
                 //for first button press
