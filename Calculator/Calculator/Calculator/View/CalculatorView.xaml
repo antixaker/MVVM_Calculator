@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Calculator.ViewModel;assembly=Calculator"
              x:Class="Calculator.CalculatorView">
+
   <ContentPage.Resources>
     <ResourceDictionary>
       <Style TargetType="Button">
@@ -20,6 +22,9 @@
     </ResourceDictionary>
   </ContentPage.Resources>
   <Grid Padding="5">
+    <Grid.BindingContext>
+      <local:CalcViewModel />
+    </Grid.BindingContext>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="*"/>
       <ColumnDefinition Width="*"/>
@@ -34,24 +39,24 @@
       <RowDefinition Height="*"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
-    <Label x:Name="Display" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" BackgroundColor="Black" FontSize="20"/>
-    <Button x:Name="ButOne" Grid.Column="0" Grid.Row="4" Text="1"/>
-    <Button x:Name="ButTwo" Grid.Column="1" Grid.Row="4" Text="2"/>
-    <Button x:Name="ButThree" Grid.Column="2" Grid.Row="4" Text="3"/>
-    <Button x:Name="ButFour" Grid.Column="0" Grid.Row="3" Text="4"/>
-    <Button x:Name="ButFive" Grid.Column="1" Grid.Row="3" Text="5"/>
-    <Button x:Name="ButSix" Grid.Column="2" Grid.Row="3" Text="6"/>
-    <Button x:Name="ButSeven" Grid.Column="0" Grid.Row="2" Text="7"/>
-    <Button x:Name="ButEight" Grid.Column="1" Grid.Row="2" Text="8"/>
-    <Button x:Name="ButNine" Grid.Column="2" Grid.Row="2" Text="9"/>
-    <Button x:Name="ButZero" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Text="0"/>
-    <Button x:Name="ButPoint" Grid.Column="2" Grid.Row="5" Text="."/>
-    <Button x:Name="ButAdd" Grid.Column="1" Grid.Row="1" Text="+" Style="{StaticResource ActionButtonStyle}"/>
-    <Button x:Name="ButSubstract" Grid.Column="0" Grid.Row="1" Text="-" Style="{StaticResource ActionButtonStyle}"/>
-    <Button x:Name="ButMultiply" Grid.Column="2" Grid.Row="1" Text="*" Style="{StaticResource ActionButtonStyle}"/>
-    <Button x:Name="ButDivide" Grid.Column="3" Grid.Row="1" Text="/" Style="{StaticResource ActionButtonStyle}"/>
-    <Button x:Name="ButReset" Grid.Column="3" Grid.Row="2" Text="C" Style="{StaticResource ServiceButtonStyle}"/>
+    <Label x:Name="Display" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" BackgroundColor="Black" FontSize="20" Text="{Binding FromDisplayString}"/>
+    <Button x:Name="ButOne" Grid.Column="0" Grid.Row="4" Text="1" Command="{Binding AddSymbolCommand}" CommandParameter="1"/>
+    <Button x:Name="ButTwo" Grid.Column="1" Grid.Row="4" Text="2" Command="{Binding AddSymbolCommand}" CommandParameter="2"/>
+    <Button x:Name="ButThree" Grid.Column="2" Grid.Row="4" Text="3" Command="{Binding AddSymbolCommand}" CommandParameter="3"/>
+    <Button x:Name="ButFour" Grid.Column="0" Grid.Row="3" Text="4" Command="{Binding AddSymbolCommand}" CommandParameter="4"/>
+    <Button x:Name="ButFive" Grid.Column="1" Grid.Row="3" Text="5" Command="{Binding AddSymbolCommand}" CommandParameter="5"/>
+    <Button x:Name="ButSix" Grid.Column="2" Grid.Row="3" Text="6" Command="{Binding AddSymbolCommand}" CommandParameter="6"/>
+    <Button x:Name="ButSeven" Grid.Column="0" Grid.Row="2" Text="7" Command="{Binding AddSymbolCommand}" CommandParameter="7"/>
+    <Button x:Name="ButEight" Grid.Column="1" Grid.Row="2" Text="8" Command="{Binding AddSymbolCommand}" CommandParameter="8"/>
+    <Button x:Name="ButNine" Grid.Column="2" Grid.Row="2" Text="9" Command="{Binding AddSymbolCommand}" CommandParameter="9"/>
+    <Button x:Name="ButZero" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Text="0" Command="{Binding AddSymbolCommand}" CommandParameter="0"/>
+    <Button x:Name="ButPoint" Grid.Column="2" Grid.Row="5" Text="." Command="{Binding AddSymbolCommand}" CommandParameter="."/>
+    <Button x:Name="ButAdd" Grid.Column="1" Grid.Row="1" Text="+" Style="{StaticResource ActionButtonStyle}" Command="{Binding AddSymbolCommand}" CommandParameter="+"/>
+    <Button x:Name="ButSubstract" Grid.Column="0" Grid.Row="1" Text="-" Style="{StaticResource ActionButtonStyle}" Command="{Binding AddSymbolCommand}" CommandParameter="-"/>
+    <Button x:Name="ButMultiply" Grid.Column="2" Grid.Row="1" Text="*" Style="{StaticResource ActionButtonStyle}" Command="{Binding AddSymbolCommand}" CommandParameter="*"/>
+    <Button x:Name="ButDivide" Grid.Column="3" Grid.Row="1" Text="/" Style="{StaticResource ActionButtonStyle}" Command="{Binding AddSymbolCommand}" CommandParameter="/"/>
+    <Button x:Name="ButReset" Grid.Column="3" Grid.Row="2" Text="C" Style="{StaticResource ServiceButtonStyle}" Command="{Binding ClearAllCommand}"/>
     <Button x:Name="ButResult" Grid.Column="3" Grid.Row="4" Grid.RowSpan="2" Text="=" Style="{StaticResource ServiceButtonStyle}"/>
-    <Button x:Name="ButRemoveLastSymbol" Grid.Column="3" Grid.Row="3" Text="←" Style="{StaticResource ServiceButtonStyle}"/>
+    <Button x:Name="ButRemoveLastSymbol" Grid.Column="3" Grid.Row="3" Text="←" Style="{StaticResource ServiceButtonStyle}" Command="{Binding RemoveLastSymbolCommand}"/>
   </Grid>
 </ContentPage>

@@ -13,8 +13,7 @@ namespace Calculator.ViewModel
     {
         readonly char[] actionSymbols = { '+', '-', '/', '*' };
 
-        string fromDisplayString;
-        string toDisplayString;
+        string fromDisplayString = "";
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -23,9 +22,17 @@ namespace Calculator.ViewModel
             this.AddSymbolCommand = new Command<string>(symbol =>
             {
                 //for first button press
-                if (string.IsNullOrEmpty(fromDisplayString) && !char.IsDigit(symbol[0]))
-                    return;
+                if (string.IsNullOrEmpty(fromDisplayString))
+                {
+                    if (char.IsDigit(symbol[0]))
+                    {
+                        FromDisplayString += symbol;
+                        return;
+                    }
+                    else
+                        return;
 
+                }
                 //constraint for input only two numbers and action symbol
                 if (!char.IsDigit(symbol[0]) && symbol != "." && CommandIsFull(fromDisplayString))
                     return;
@@ -38,17 +45,18 @@ namespace Calculator.ViewModel
                 //check re-enter mathoperator
                 else if (!Char.IsDigit(symbol[0]) && !CanAddMath(fromDisplayString, lastSymbol))
                 {
-                    fromDisplayString = ReplaceLastSymbol(fromDisplayString, symbol);
+                    FromDisplayString = ReplaceLastSymbol(fromDisplayString, symbol);
                     return;
                 }
 
-                fromDisplayString += symbol;
+                FromDisplayString += symbol;
 
             });
 
             this.RemoveLastSymbolCommand = new Command(obj =>
             {
-                this.FromDisplayString = fromDisplayString.Substring(0, fromDisplayString.Length - 1);
+                if (!string.IsNullOrEmpty(fromDisplayString))
+                    this.FromDisplayString = fromDisplayString.Substring(0, fromDisplayString.Length - 1);
             });
 
             this.ClearAllCommand = new Command(obj => { this.FromDisplayString = string.Empty; });
@@ -61,26 +69,11 @@ namespace Calculator.ViewModel
                 if (fromDisplayString != value)
                 {
                     fromDisplayString = value;
-                    OnPropertyChanged("FromDisplaySymbol");
-                    ToDisplayString = fromDisplayString;
+                    OnPropertyChanged("FromDisplayString");
                 }
             }
 
             get { return fromDisplayString; }
-        }
-
-        public string ToDisplayString
-        {
-            protected set
-            {
-                if (toDisplayString != value)
-                {
-                    toDisplayString = value;
-                    OnPropertyChanged("ToDisplayString");
-                }
-            }
-
-            get { return toDisplayString; }
         }
 
         public ICommand AddSymbolCommand { protected set; get; }
