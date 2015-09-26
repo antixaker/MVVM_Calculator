@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Calculator.ViewModel
 {
-    class CalcViewModelBase : INotifyPropertyChanged
+    abstract class CalcViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
