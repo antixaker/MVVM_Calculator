@@ -38,6 +38,7 @@
     <Compile Include="App.cs" />
     <Compile Include="Model\CalculatorModel.cs" />
     <Compile Include="ViewModel\CalcViewModel.cs" />
+    <Compile Include="ViewModel\CalcViewModelBase.cs" />
     <Compile Include="View\CalculatorView.xaml.cs">
       <DependentUpon>CalculatorView.xaml</DependentUpon>
     </Compile>

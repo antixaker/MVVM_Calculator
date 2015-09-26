@@ -9,15 +9,13 @@ using Xamarin.Forms;
 
 namespace Calculator.ViewModel
 {
-    class CalcViewModel : INotifyPropertyChanged
+    class CalcViewModel : CalcViewModelBase
     {
         readonly char[] actionSymbols = { '+', '-', '/', '*' };
 
         readonly ICalculatorModel _model;
 
         string displayString = "";
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public CalcViewModel()
         {
@@ -80,7 +78,7 @@ namespace Calculator.ViewModel
                 if (displayString != value)
                 {
                     displayString = value;
-                    OnPropertyChanged("DisplayString");
+                    OnPropertyChanged(nameof(DisplayString));
                 }
             }
 
@@ -94,11 +92,6 @@ namespace Calculator.ViewModel
         public ICommand ClearAllCommand { protected set; get; }
 
         public ICommand CalculateCommand { protected set; get; }
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         #region Servise methods
         string ReplaceLastSymbol(string valueToChange, string symbolToReplace)
